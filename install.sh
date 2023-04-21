@@ -69,9 +69,6 @@ echo "*/10 * * * * /usr/local/systemMonitor/systemMonitor -c /usr/local/systemMo
 
 touch error.log
 
-# wget config.json, https://raw.githubusercontent.com/uselibrary/systemMonitor/main/data/config.json
-wget -O config.json https://raw.githubusercontent.com/uselibrary/systemMonitor/main/data/config.json
-
 # config json, example:
 # {
 #     "name": "demo.domain.com",
@@ -98,15 +95,23 @@ read -p "请输入磁盘使用率阈值：" diskpercentage
 read -p "请输入网络使用率阈值：" network
 read -p "请输入内存使用率阈值：" memorypercentage
 
-# replace config.json
-sed -i "s/demo.domain.com/$name/g" config.json
-sed -i "s/123456789:ABCD45-VCSIDUIC78VS78RN/$token/g" config.json
-sed -i "s/123456789/$chat_id/g" config.json
-sed -i "s/dev\/sda1/$disk/g" config.json
-sed -i "s/0.5/$cpu/g" config.json
-sed -i "s/30/$diskpercentage/g" config.json
-sed -i "s/500/$network/g" config.json
-sed -i "s/50/$memorypercentage/g" config.json
+touch config.json
 
+# add config to config.json
+echo "{" >> config.json
+echo "    \"name\": \"$name\"," >> config.json
+echo "    \"telegram\": {" >> config.json
+echo "        \"token\": \"$token\"," >> config.json
+echo "        \"chat_id\": \"$chat_id\"" >> config.json
+echo "    }," >> config.json
+echo "    \"disk\": \"$disk\"," >> config.json
+echo "    \"status\": {" >> config.json
+echo "        \"cpu\": $cpu," >> config.json
+echo "        \"diskpercentage\": $diskpercentage," >> config.json
+echo "        \"network\": $network," >> config.json
+echo "        \"memorypercentage\": $memorypercentage" >> config.json
+echo "    }" >> config.json
+echo "}" >> config.json
 
+# run systemMonitor
 
