@@ -63,9 +63,10 @@ wget -O systemMonitor.zip $downloadUrl
 unzip systemMonitor.zip
 rm -f systemMonitor.zip
 chmod +x systemMonitor
-# add systemMonitor to crontab
-# example: */10 * * * * /usr/local/systemMonitor/systemMonitor -c /usr/local/systemMonitor/config.json >> /usr/local/systemMonitor/error.log 2>& 1
-echo "*/10 * * * * /usr/local/systemMonitor/systemMonitor -c /usr/local/systemMonitor/config.json >> /usr/local/systemMonitor/error.log 2>& 1" >> /var/spool/cron/root
+# add systemMonitor to crontab, run every 10 minutes, root cron, for example: crontab -e
+# */10 * * * * /usr/local/systemMonitor/systemMonitor -c /usr/local/systemMonitor/config.json >> /usr/local/systemMonitor/error.log 2>& 1
+echo "*/10 * * * * /usr/local/systemMonitor/systemMonitor -c /usr/local/systemMonitor/config.json >> /usr/local/systemMonitor/error.log 2>& 1" >>  /var/spool/cron/crontabs/root
+
 
 touch error.log
 
@@ -114,4 +115,4 @@ echo "    }" >> config.json
 echo "}" >> config.json
 
 # run systemMonitor
-
+/usr/local/systemMonitor/systemMonitor -c /usr/local/systemMonitor/config.json
