@@ -1,0 +1,14 @@
+{
+    "name": "demo.domain.com",
+    "telegram": {
+        "token": "123456789:ABCD45-VCSIDUIC78VS78RN",
+        "chat_id": "123456789"
+    },
+    "disk": "dev/sda1",
+    "status": {
+        "cpu": 0.5,
+        "diskpercentage": 30,
+        "network": 500,
+        "memorypercentage": 50
+    }
+}
