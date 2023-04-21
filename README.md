@@ -6,7 +6,7 @@ A Self-hosted Lightweight System Monitor by Golang
 
 
 # 效果演示
-
+![notice](https://raw.githubusercontent.com/uselibrary/systemMonitor/main/assets/8cb18054e876f2fa70706.jpg)
 
 
 # 安装方法
