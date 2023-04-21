@@ -33,7 +33,7 @@ fi
 # distribution: 1. redhat/centos/rocky/almalinux 2. debian/ubuntu
 if [ -f /etc/redhat-release ]; then
     distribution="redhat"
-elif [ -f /etc/lsb-release ]; then
+elif [ -f /etc/os-release ]; then
     distribution="debian"
 else
     echo "暂时仅支持RedHat系列和Debian系列发行版"
