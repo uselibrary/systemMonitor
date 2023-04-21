@@ -54,12 +54,15 @@ fi
 # make dir
 mkdir -p /usr/local/systemMonitor
 cd /usr/local/systemMonitor
-# check th lastest version of systemMonitor by github api
-version=$(curl -s https://api.github.com/repos/uselibrary/systemMonitor/releases/latest | grep "tag_name" | cut -d '"' -f 4)
-# build download url and download systemMonitor
-# example:https://github.com/uselibrary/systemMonitor/releases/download/v0.0.1/systemMonitor.zip
-downloadUrl="https://github.com/uselibrary/systemMonitor/releases/download/$version/systemMonitor.zip"
-wget -O systemMonitor.zip $downloadUrl
+# # check th lastest version of systemMonitor by github api
+# version=$(curl -s https://api.github.com/repos/uselibrary/systemMonitor/releases/latest | grep "tag_name" | cut -d '"' -f 4)
+# # build download url and download systemMonitor
+# # example:https://github.com/uselibrary/systemMonitor/releases/download/v0.0.1/systemMonitor.zip
+# downloadUrl="https://github.com/uselibrary/systemMonitor/releases/download/$version/systemMonitor.zip"
+# wget -O systemMonitor.zip $downloadUrl
+
+wget -O systemMonitor.zip https://github.com/uselibrary/systemMonitor/releases/download/v0.0.1/systemMonitor.zip
+
 unzip systemMonitor.zip
 rm -f systemMonitor.zip
 chmod +x systemMonitor
@@ -67,34 +70,17 @@ chmod +x systemMonitor
 # */10 * * * * /usr/local/systemMonitor/systemMonitor -c /usr/local/systemMonitor/config.json >> /usr/local/systemMonitor/error.log 2>& 1
 echo "*/10 * * * * /usr/local/systemMonitor/systemMonitor -c /usr/local/systemMonitor/config.json >> /usr/local/systemMonitor/error.log 2>& 1" >>  /var/spool/cron/crontabs/root
 
-
 touch error.log
 
-# config json, example:
-# {
-#     "name": "demo.domain.com",
-#     "telegram": {
-#         "token": "123456789:ABCD45-VCSIDUIC78VS78RN",
-#         "chat_id": "123456789"
-#     },
-#     "disk": "dev/sda1",
-#     "status": {
-#         "cpu": 0.5,
-#         "diskpercentage": 30,
-#         "network": 500,
-#         "memorypercentage": 50
-#     }
-# }
-
 # ask user to input name, telegram token, telegram chat_id, disk
-read -p "请输入服务器名称：" name
-read -p "请输入Telegram Bot Token：" token
-read -p "请输入Telegram Chat ID：" chat_id
-read -p "请输入磁盘名称：" disk
-read -p "请输入CPU使用率阈值：" cpu
-read -p "请输入磁盘使用率阈值：" diskpercentage
-read -p "请输入网络使用率阈值：" network
-read -p "请输入内存使用率阈值：" memorypercentage
+read -p "请输入服务器名称: " name
+read -p "请输入Telegram Bot Token: " token
+read -p "请输入Telegram Chat ID: " chat_id
+read -p "请输入磁盘名称: " disk
+read -p "请输入CPU使用率阈值: " cpu
+read -p "请输入磁盘使用率阈值: " diskpercentage
+read -p "请输入网络使用率阈值: " network
+read -p "请输入内存使用率阈值: " memorypercentage
 
 touch config.json
 
