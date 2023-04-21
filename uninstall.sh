@@ -31,6 +31,6 @@ echo "正在删除定时任务..."
 # remove crontab
 # the installtion using "echo "*/10 * * * * /usr/local/systemMonitor/systemMonitor -c /usr/local/systemMonitor/config.json >> /usr/local/systemMonitor/error.log 2>& 1" >> /var/spool/cron/root"
 # so we need to remove the line which contains "systemMonitor"
-sed -i '/systemMonitor/d' /var/spool/cron/root
+sed -i '/systemMonitor/d' /var/spool/cron/crontabs/root
 
 echo "卸载完成！"
